@@ -1,0 +1,23 @@
+---
+- name: Check if a file exists on the server
+  hosts: all   # or replace with a specific host/group
+  gather_facts: false
+
+  vars:
+    target_file: "/home/ansible/lab-error-handling/transaction_list"  # <== Change this to the file you want to check
+
+  tasks:
+    - name: Check if the file exists
+      ansible.builtin.stat:
+        path: "{{ target_file }}"
+      register: file_check
+
+    - name: Display result if file exists
+      debug:
+        msg: "File {{ target_file }} exists."
+      when: file_check.stat.exists
+
+    - name: Display result if file does not exist
+      debug:
+        msg: "File {{ target_file }} does NOT exist."
+      when: not file_check.stat.exists
