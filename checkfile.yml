@@ -1,12 +1,10 @@
 ---
-- name: Check if a file exists
-  hosts: all
-  gather_facts: false
-
+- hosts: all
   tasks:
     - name: Check file existence
-      stat:
-        path: /home/ansible/lab-error-handling/transaction_list
-      register: result
-    - debug: msg="File exists!"
+      block:
+        - stat:
+            path: //home/ansible/lab-error-handling/transaction_list
+          register: result
+        - debug: msg="File exists!"
       
