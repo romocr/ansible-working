@@ -8,7 +8,5 @@
       stat:
         path: /home/ansible/lab-error-handling/transaction_list
       register: result
-
-    - debug:
-        msg: "File exists!"
-      when: result.stat.exists
+    - debug: msg="File exists!"
+      
